@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #a4deff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #f551df;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f551df;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #fc9bef;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        a {
+            color: #f76ee4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+        };
+
+        function toggleForm(formId) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function login() {
+            // إضافة منطق تسجيل الدخول هنا
+            alert("Login functionality to be implemented");
+        }
+
+        function signup() {
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+
+            // تحقق من أن الحقول ليست فارغة (يمكنك إضافة المزيد من التحقق هنا)
+            if (username === "" || password === "") {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            // يمكنك إضافة منطق إرسال البيانات إلى الخادم هنا
+            // على سبيل المثال، استخدام fetch أو XMLHttpRequest لإرسال البيانات إلى API
+
+            // عرض رسالة تأكيد بسيطة
+            alert(`User ${username} signed up successfully!`);
+
+            // الانتقال إلى صفحة bmi.html بعد التسجيل الناجح
+            window.location.href = 'bmi.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="loginForm" class="form" style="display:none;">
+            <h2>Login</h2>
+            <label for="loginUsername">Username:</label>
+            <input type="text" id="loginUsername" required>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" required>
+            <button id="loginButton" onclick="login()">Login</button>
+            <p>Don't have an account? <a href="#" onclick="toggleForm('signupForm')">Sign up here</a>.</p>
+        </div>
+        <div id="signupForm" class="form">
+            <h2>Sign Up</h2>
+            <label for="signupUsername">Username:</label>
+            <input type="text" id="signupUsername" required>
+            <label for="signupPassword">Password:</label>
+            <input type="password" id="signupPassword" required>
+            <button id="signupButton" onclick="signup()">Sign Up</button>
+            <p>Already have an account? <a href="#" onclick="toggleForm('loginForm')">Login here</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
+ 

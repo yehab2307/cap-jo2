@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe4e1; /* Light pink background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #b6deff; /* Turquoise blue background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #f551df; /* Pink title */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #f551df; /* Pink button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #fc9bef; /* Lighter pink hover */
+        }
+
+        #bmiResult {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .bmi-message {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Logo Styles */
+        #logo {
+            width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Add your logo here -->
+        <img id="logo" src="logo.png" alt="Logo"> <!-- Replace with your logo URL -->
+        <h1>BMI Calculator</h1>
+        <form id="bmiForm">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" required>
+            <button type="submit">Calculate BMI</button>
+        </form>
+        <div id="bmiResult"></div> <!-- This is where the BMI will be displayed -->
+        <div id="bmiMessage" class="bmi-message"></div> <!-- This is where the BMI message will be displayed -->
+        <button onclick="goToHomePage()">NEXT</button>
+    </div>
+
+    <script>
+        // Function to calculate BMI
+        document.getElementById('bmiForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get weight and height values
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to meters
+
+            // Calculate BMI
+            const bmi = calculateBMI(weight, height);
+
+            // Display BMI result and message
+            displayBMI(bmi);
+        });
+
+        // Function to calculate BMI
+        function calculateBMI(weight, height) {
+            return weight / (height * height);
+        }
+
+        // Function to display BMI and message
+        function displayBMI(bmi) {
+            const bmiResult = document.getElementById('bmiResult');
+            const bmiMessage = document.getElementById('bmiMessage');
+
+            // Display BMI value
+            bmiResult.innerHTML = `Your BMI: <strong>${bmi.toFixed(2)}</strong>`;
+
+            // Display BMI message based on BMI value
+            if (bmi < 18.5) {
+                bmiMessage.innerHTML = "You are underweight. Eat more and stay healthy!";
+                bmiMessage.style.color = "#ff9800"; // Orange color
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                bmiMessage.innerHTML = "You have a normal weight. Keep it up!";
+                bmiMessage.style.color = "#4caf50"; // Green color
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                bmiMessage.innerHTML = "You are overweight. Exercise more and eat healthy!";
+                bmiMessage.style.color = "#ff5722"; // Red color
+            } else {
+                bmiMessage.innerHTML = "You have a little excess body fat. We will try to help you lose it with a small diet.";
+                bmiMessage.style.color = "#f44336"; // Dark red color
+            }
+        }
+
+        // Function to go to the home page
+        function goToHomePage() {
+            window.location.href = "selection.html"; // Replace with your home page URL
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Diabetes</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1; /* Light pink background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #b6deff; /* Light blue header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        nav a {
+            color: black;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f551df; /* Pink hover color */
+        }
+
+        main {
+            text-align: center;
+            margin-top: 100px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+            color: white;
+            background-color: #f551df; /* Pink button color */
+            padding: 12px 25px;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-buttons a:hover {
+            background-color: #fc9bef; /* Lighter pink hover */
+        }
+
+        footer {
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+            background-color: #b6deff; /* Light blue footer */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #ffe4e1; /* Same as body background */
+            padding: 30px; /* Increased padding */
+            border-radius: 10px;
+            text-align: center;
+            width: 350px; /* Slightly wider */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px; /* Space below the title */
+            font-size: 24px; /* Larger title */
+            color: #333; /* Darker text for better readability */
+        }
+
+        .close {
+            cursor: pointer;
+            color: red;
+            float: right;
+            font-size: 24px; /* Larger close button */
+            font-weight: bold;
+            margin-top: -10px; /* Adjusted position */
+        }
+
+        .close:hover {
+            color: darkred;
+        }
+
+        .modal input {
+            width: 100%;
+            margin: 15px 0; /* Increased margin between inputs */
+            padding: 12px; /* Larger padding for inputs */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            font-size: 16px; /* Larger font size */
+        }
+
+        .modal button {
+            width: 100%;
+            margin: 20px 0 10px 0; /* Adjusted margins */
+            padding: 12px; /* Larger padding for buttons */
+            border: none;
+            border-radius: 5px;
+            background-color: #f551df; /* Pink button color */
+            color: white;
+            cursor: pointer;
+            font-size: 16px; /* Larger font size */
+            transition: background-color 0.3s ease;
+        }
+
+        .modal button:hover {
+            background-color: #fc9bef; /* Lighter pink hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="The Future of Diabetes Logo">
+        </div>
+        <nav>
+            <a onclick="openModal('loginModal')">Login</a>
+            <a onclick="openModal('signupModal')">Sign Up</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2 style="color: rgb(11, 203, 236);">The Future of Diabetes</h2>
+        <p>Welcome to a better future in diabetes care.</p>
+        <div class="action-buttons">
+            <a onclick="openModal('loginModal')">Login</a>
+            <a onclick="openModal('signupModal')">Sign Up</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 The Future of Diabetes. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="validateLogin(event)">
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm" onsubmit="validateSignup(event)">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to open a modal
+        function openModal(id) {
+            document.getElementById(id).style.display = "flex";
+        }
+
+        // Function to close a modal
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        // Function to validate login form
+        function validateLogin(event) {
+            event.preventDefault();
+            const username = event.target[0].value;
+            const password = event.target[1].value;
+
+            if (username && password) {
+                alert('Login successful!');
+                closeModal('loginModal');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Function to validate signup form
+        function validateSignup(event) {
+            event.preventDefault();
+            const fullName = event.target[0].value;
+            const email = event.target[1].value;
+            const password = event.target[2].value;
+            const confirmPassword = event.target[3].value;
+
+            if (fullName && email && password && confirmPassword) {
+                if (password === confirmPassword) {
+                    alert('Signup successful! Redirecting to BMI page...');
+                    closeModal('signupModal');
+                    // Redirect to BMI.html after successful signup
+                    window.location.href = "bmi.html";
+                } else {
+                    alert('Passwords do not match.');
+                }
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+    </script>
+</body>
+</html>

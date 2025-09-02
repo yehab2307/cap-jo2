@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes-Friendly Meal Recommender</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+        /* Style for the home page */
+.home {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(179, 96, 24, 0.1);
+}
+
+#choices {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #0d0d57;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b7babd;
+}
+
+/* Style for the index page */
+.index {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+#mealOutput {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+#generateButton {
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+}
+#chat-box {
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  #user-input {
+    width: 200px;
+    padding: 5px;
+  }
+
+
+    </style>
+    <body class="index">
+
+        <h1 style="text-align: center">chat bot with AI</h1>
+    
+<div class="container">
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <div class="side-buttons">
+        <button onclick="openPage('recipes.html')">Recipes</button>
+        <button onclick="openPage('exercises.html')">Exercises</button>
+        <button onclick="openPage('products.html')">Products</button>
+        <button onclick="openPage('1.html')">my meal</button>
+    </div>
+    <script src="script.js"></script>

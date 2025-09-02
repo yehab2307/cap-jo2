@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recipes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1; /* Light pastel background color */
+            color: #333;
+        }
+        .navbar {
+            background-color: #b6deff; /* Pastel color */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 10px 0;
+            text-align: center; /* Center the content */
+        }
+        .navbar a {
+            display: inline-block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #ffc0cb; /* Slightly darker pastel for hover effect */
+            transform: scale(1.1);
+            font-size: 18px; /* Slightly larger font size on hover */
+        }
+        .navbar img {
+            height: 70px;
+            vertical-align: middle;
+        }
+        .container {
+            margin-top: 60px; /* Space for the navbar */
+            text-align: center;
+            padding: 20px;
+            background-color: #ffe4e1; /* Ensure the container matches the body */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            width: 300px;
+            background-color: #b6deff; /* Same as navbar */
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px); /* Slightly off-screen */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            cursor: pointer;
+        }
+        .card.show {
+            opacity: 1; /* Show the card */
+            transform: translateY(0); /* Bring the card into view */
+        }
+        .card img {
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card .info {
+            padding: 20px;
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1rem;
+            color: #333;
+            text-align: center; /* Center align text */
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #b6deff; /* Same as navbar */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .modal-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .modal-content h3 {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: #0d0d57; /* Dark blue for headings */
+        }
+        .modal-content p {
+            font-size: 1rem;
+            color: #333;
+            text-align: left; /* Left align text for better readability */
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="index">
+    <div class="navbar">
+        <img src="logo.png" alt="Logo">
+        <a href="recipes.html">Recipes</a>
+        <a href="exercises.html">Exercises</a>
+        <a href="products.html">Products</a>
+        <a href="https://chatgpt.com/g/g-TLQZRPNDG-insu-bot">Chat Bot</a>
+        <a href="https://huggingface.co/spaces/yehab/insu">Food Calculator</a>
+        <a href="type1.html">My Meal</a>
+        <a href="https://huggingface.co/spaces/yehab/insu">my measure</a>
+
+    </div>
+
+    <div class="container">
+        <!-- Vegetable Soup -->
+        <div class="card" onclick="openModal(
+            'Vegetable Soup', 
+            '150 Calories | 20g Carbs | 5g Protein',
+            'Ingredients:<br>- 2 tablespoons of olive oil.<br>- 1 large onion, chopped.<br>- 2 garlic cloves, chopped.<br>- 2 carrots, cut into thin slices.<br>- 2 potatoes, cut into small cubes.<br>- 2 zucchini, cut into thin slices.<br>- 1 cup of chopped broccoli.<br>- 1 cup of chopped cauliflower.<br>- 4 cups of broth (vegetable, chicken, or meat).<br>- Salt and pepper to taste.<br>- A teaspoon of dried thyme.',
+            'Instructions:<br>1. In a deep pot over medium heat, heat the olive oil, then add the chopped onions and sauté until they become transparent.<br>2. Add the chopped garlic and stir for two minutes.<br>3. Add the carrots, potatoes, and zucchini and stir for 5 minutes.<br>4. Add broccoli and cauliflower and continue to stir for an additional 2 minutes.<br>5. Add the broth and let the soup boil. Reduce the heat and let the soup cook for 15-20 minutes until the vegetables are tender.<br>6. Use an electric blender to blend the soup until smooth.<br>7. Return the soup to the pot and heat over low heat for a few minutes.<br>8. Serve warm with pieces of toasted bread or crackers, if desired.'
+        )">
+            <img src="vegetable-soup.jpeg" alt="Vegetable Soup">
+            <div class="info">
+                <h2>Vegetable Soup</h2>
+                <p>150 Calories | 20g Carbs | 5g Protein</p>
+            </div>
+        </div>
+
+        <!-- Pumpkin, Spinach and Lentil Lasagne -->
+        <div class="card" onclick="openModal(
+            'Pumpkin, Spinach and Lentil Lasagne', 
+            '300 Calories | 40g Carbs | 15g Protein',
+            'Ingredients:<br>1 tbsp olive oil<br>1 brown onion, finely chopped<br>2 garlic cloves, crushed<br>900g Naranka Gold Pumpkin, peeled, cut into 1.5cm cubes<br>2 x 400g cans Coles brown lentils, rinsed, drained<br>1/2 cup vegetable stock<br>690g bottle Coles Brand Italian Tomato Passata<br>500g ricotta<br>Good pinch ground nutmeg<br>375g packet Coles fresh lasagne sheets<br>120g packet baby spinach, trimmed, finely shredded<br>1 1/2 cups grated Coles Brand Australian Tasty Cheddar',
+            'Instructions:<br>1. Preheat oven to 190C (170C fan-forced). Grease a 26cm x 20cm x 6cm baking dish.<br>2. Heat the olive oil in a large saucepan over medium heat. Cook the onion for 5 mins until soft and lightly golden. Add the garlic and cook for 1 min.<br>3. Add the pumpkin, lentils, and vegetable stock. Reserve 1 cup of the passata and stir the remaining passata into the pumpkin mixture. Cover and bring to the boil. Reduce heat slightly and cook, covered, for 20 mins until the pumpkin is tender. Transfer to a large bowl to cool slightly, then refrigerate until cold.<br>4. Mash the ricotta in a bowl. Stir in the nutmeg and season.<br>5. Line the base of the prepared dish with lasagne sheets. Spread over half the pumpkin mixture, then top with another layer of lasagne sheets. Sprinkle with the ricotta mixture and top with spinach, then cover with another layer of lasagne sheets.<br>6. Spread over the remaining pumpkin mixture, then top with remaining lasagne sheets. Spread over the reserved passata and sprinkle with cheddar. Bake for 45 mins until golden and cooked through. Serve with rocket leaves.'
+        )">
+            <img src="vegetarian-lasagne.jpeg" alt="Pumpkin, Spinach and Lentil Lasagne">
+            <div class="info">
+                <h2>Pumpkin, Spinach and Lentil Lasagne</h2>
+                <p>300 Calories | 40g Carbs | 15g Protein</p>
+            </div>
+        </div>
+
+        <!-- Roast Vegetable and Buckwheat Salad -->
+        <div class="card" onclick="openModal(
+            'Roast Vegetable and Buckwheat Salad', 
+            '200 Calories | 25g Carbs | 10g Protein',
+            'Ingredients:<br>2 bunches baby rainbow carrots, trimmed, scrubbed<br>2 red capsicums, coarsely chopped<br>1 red onion, cut into wedges<br>2 tbsp Cobram Estate Extra Virgin Olive Oil Light Flavour<br>60ml (1/4 cup) fresh orange juice<br>1 tsp cumin seeds<br>2 tsp finely grated fresh ginger<br>1 garlic clove, crushed<br>1 1/2 tbsp honey<br>200g raw buckwheat, rinsed, dried<br>1 1/2 tbsp red wine vinegar<br>1 cup fresh coriander, firmly packed<br>1 cup fresh parsley leaves, firmly packed<br>100g reduced fat feta, crumbled<br>40g baby rocket leaves<br>45g (1/4 cup) roasted almonds, coarsely chopped',
+            'Instructions:<br>1. Meanwhile, heat a non-stick frying pan over medium heat. Add buckwheat and cook, stirring, for 2 minutes until toasted. Allow to cool for 5 minutes. Bring a saucepan of water to the boil over high heat. Add buckwheat to pan. Reduce heat to medium-low and simmer for 5 minutes until al dente. Drain and refresh under cold running water. Spread over a tray lined with paper towel to dry.<br>2. Whisk vinegar and remaining oil and honey in a bowl. Season. Add buckwheat, herbs, feta, rocket and roast vegetables. Toss to combine. Divide among plates. Top with almonds.'
+        )">
+            <img src="roast-vegetable-and-buckwheat-salad.jpeg" alt="Roast Vegetable and Buckwheat Salad">
+            <div class="info">
+                <h2>Roast Vegetable and Buckwheat Salad</h2>
+                <p>200 Calories | 25g Carbs | 10g Protein</p>
+            </div>
+        </div>
+
+        <!-- Cabbage Soup -->
+        <div class="card" onclick="openModal(
+            'Cabbage Soup', 
+            '120 Calories | 15g Carbs | 4g Protein',
+            'Ingredients:<br>- 1 tablespoon olive oil.<br>- 1 onion, chopped.<br>- 2 garlic cloves, minced.<br>- 5 cups cabbage, chopped.<br>- 2 carrots, sliced.<br>- 1 green bell pepper, chopped.<br>- 1 can diced tomatoes.<br>- 6 cups vegetable broth.<br>- Salt and pepper to taste.',
+            'Instructions:<br>1. Heat olive oil in a large pot over medium heat. Add onion and garlic; cook until onion is tender.<br>2. Stir in cabbage, carrots, and green pepper. Cook until vegetables are tender, about 5 minutes.<br>3. Add tomatoes and broth. Bring to a boil. Reduce heat; simmer uncovered for 15 minutes.<br>4. Season with salt and pepper. Serve hot.'
+        )">
+            <img src="cabbage-soup.jpeg" alt="Cabbage Soup">
+            <div class="info">
+                <h2>Cabbage Soup</h2>
+                <p>120 Calories | 15g Carbs | 4g Protein</p>
+            </div>
+        </div>
+
+        <!-- Green Lentil Soup -->
+        <div class="card" onclick="openModal(
+            'Green Lentil Soup', 
+            '180 Calories | 22g Carbs | 8g Protein',
+            'Ingredients:<br>- 1 tablespoon olive oil.<br>- 1 onion, chopped.<br>- 2 garlic cloves, minced.<br>- 1 cup green lentils, rinsed.<br>- 4 cups vegetable broth.<br>- 1 carrot, chopped.<br>- 1 celery stalk, chopped.<br>- 1 bay leaf.<br>- 1 teaspoon cumin.<br>- Salt and pepper to taste.',
+            'Instructions:<br>1. Heat olive oil in a large pot over medium heat. Add onion and garlic; cook until onion is tender.<br>2. Stir in lentils, broth, carrot, celery, bay leaf, and cumin. Bring to a boil.<br>3. Reduce heat; simmer until lentils are tender, about 30 minutes.<br>4. Season with salt and pepper. Remove bay leaf before serving.'
+        )">
+            <img src="green-lentil-soup.jpeg" alt="Green Lentil Soup">
+            <div class="info">
+                <h2>Green Lentil Soup</h2>
+                <p>180 Calories | 22g Carbs | 8g Protein</p>
+            </div>
+        </div>
+
+        <!-- Pasta with Tuna and Bechamel -->
+        <div class="card" onclick="openModal(
+            'Pasta with Tuna and Bechamel', 
+            '350 Calories | 45g Carbs | 20g Protein',
+            'Ingredients:<br>- 300g pasta.<br>- 2 cans tuna, drained.<br>- 1 onion, chopped.<br>- 2 garlic cloves, minced.<br>- 2 tablespoons flour.<br>- 2 cups milk.<br>- 1 cup cheese, grated.<br>- Salt and pepper to taste.',
+            'Instructions:<br>1. Cook pasta according to package instructions.<br>2. In a saucepan, sauté onion and garlic until tender. Stir in flour and cook for 1 minute.<br>3. Gradually add milk, stirring constantly until thickened. Stir in cheese until melted.<br>4. Mix pasta, tuna, and béchamel sauce. Season with salt and pepper. Serve hot.'
+        )">
+            <img src="pasta-with-tuna-and-bechamel.jpeg" alt="Pasta with Tuna and Bechamel">
+            <div class="info">
+                <h2>Pasta with Tuna and Bechamel</h2>
+                <p>350 Calories | 45g Carbs | 20g Protein</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalCalories"></p>
+            <h3>Ingredients</h3>
+            <p id="modalIngredients"></p>
+            <h3>Instructions</h3>
+            <p id="modalInstructions"></p>
+        </div>
+    </div>
+
+    <script>
+        // Add animation to cards on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".card");
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add("show");
+                }, index * 300); // Delay each card's animation
+            });
+        });
+
+        // Function to open modal
+        function openModal(title, calories, ingredients, instructions) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalCalories').innerText = calories;
+            document.getElementById('modalIngredients').innerHTML = ingredients;
+            document.getElementById('modalInstructions').innerHTML = instructions;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

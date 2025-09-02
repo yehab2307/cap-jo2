@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Type Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #a4deff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: left;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #f551df;
+            text-align: center;
+        }
+
+        #choices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            width: 30px; /* تم تكبير دائرة الاختيار */
+            height: 30px; /* تم تكبير دائرة الاختيار */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f551df;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px; /* تم إضافة مسافة بين الاختيارات والزر */
+        }
+
+        button:hover {
+            background-color: #fc9bef;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        a {
+            color: #f76ee4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="script.js" defer></script> <!-- تم إضافة السكريبت وتأجيل تنفيذه -->
+</head>
+<body>
+    <div class="container">
+        <h1>Choose which type of Diabetes you have?</h1>
+        <div id="choices">
+            <label>
+                <input type="radio" name="diabetesType" value="type1">
+                <span>Type 1 Diabetes</span>
+            </label>
+            <label>
+                <input type="radio" name="diabetesType" value="type2">
+                <span>Type 2 Diabetes</span>
+            </label>
+            <label>
+                <input type="radio" name="diabetesType" value="prediabetes">
+                <span>Prediabetes</span>
+            </label>
+            <label>
+                <input type="radio" name="diabetesType" value="gestational">
+                <span>Gestational Diabetes</span>
+            </label>
+        </div>
+        <button onclick="submitSelection()">Submit</button>
+    </div>
+</body>
+</html>

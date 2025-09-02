@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرشح وجباتي</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1; /* Light pastel background color */
+            color: #333;
+        }
+        .navbar {
+            background-color: #b6deff; /* Pastel color */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 10px 0;
+            text-align: center; /* Center the content */
+        }
+        .navbar a {
+            display: inline-block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #ffc0cb; /* Slightly darker pastel for hover effect */
+            transform: scale(1.1);
+            font-size: 18px; /* Slightly larger font size on hover */
+        }
+        .navbar img {
+            height: 40px;
+            vertical-align: middle;
+        }
+        .container {
+            margin-top: 60px; /* Space for the navbar */
+            text-align: center;
+            padding: 20px;
+            background-color: #ffe4e1; /* Ensure the container matches the body */
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+        input, select {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #b7a2ee;
+            border-radius: 5px;
+            background-color: #fffafa; /* Light pastel input background */
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        input:hover, select:hover {
+            transform: scale(1.05);
+            font-size: 16px; /* Slightly larger font size on hover */
+        }
+        #generateButton {
+            padding: 10px 20px;
+            background-color: #fa7bef;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        #generateButton:hover {
+            background-color: #f76ee4;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body class="index">
+    <div class="navbar">
+        <img src="logo.png" alt="Logo"> <!-- Replace with your logo path -->
+        <a href="وصفات.html">وصفات</a>
+        <a href="تمرينات.html">تمرينات</a>
+        <a href="منتجات.html">معلومات المنتج الغذائي</a>
+        <a href="chat2.html">شات بوت</a>
+        <a href="مودل.html">محاسب الطعام </a>
+        <a href="1.HTML">وجباتي </a>
+
+    </div>
+
+    <div class="container">
+        <h1>مرشح وجباتي</h1>
+
+        <label for="ageInput">ادخل عمرك:</label>
+        <input type="number" id="ageInput" min="1" max="100" value="20">
+        <br><br>
+
+        <label for="mealType">اختار نوع الوجبه:</label>
+        <select id="mealType">
+            <option value="breakfast">فطار</option>
+            <option value="lunch">غداء</option>
+            <option value="dinner">عشاء</option>
+        </select>
+        <br><br>
+
+        <div id="mealOutput"></div>
+        <button id="generateButton">انشاء وجبه عشوائيه</button>
+    </div>
+
+    <script src="سكريبت.js"></script>
+</body>
+</html>

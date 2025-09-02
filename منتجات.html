@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Food Facts Search & Chatbot</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8e8e8;
+    }
+    .navbar {
+        background-color: #b6deff; /* Pastel color */
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        padding: 10px 0;
+        text-align: center; /* Center the content */
+    }
+    .navbar a {
+        display: inline-block;
+        color: #333;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: transform 0.3s, font-size 0.3s;
+    }
+    .navbar a:hover {
+        background-color: #ffc0cb; /* Slightly darker pastel for hover effect */
+        transform: scale(1.1);
+        font-size: 18px; /* Slightly larger font size on hover */
+    }
+    .navbar img {
+        height: 40px;
+        vertical-align: middle;
+    }
+    .container {
+    max-width: 600px;
+    margin: 100px auto; /* Adjusted margin for the navbar */
+    padding: 20px;
+    background-color: #f8e8e8; /* Adjusted background color */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #333; /* Adjusted text color */
+}
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    input[type="text"] {
+        width: calc(100% - 80px);
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button {
+        display: inline-block;
+        width: 80px;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #chatContainer {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .userMessage {
+        background-color: #007bff;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        max-width: 70%;
+    }
+    .botMessage {
+        background-color: #f0f0f0;
+        color: #000;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        max-width: 70%;
+    }
+</style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="logo.png" alt="Logo"> <!-- Replace with your logo path -->
+        <a href="وصفات.html">وصفات</a>
+        <a href="تمرينات.html">تمرينات</a>
+        <a href="منتجات.html">معلومات المنتج الغذائي</a>
+        <a href="chat2.html">شات بوت</a>
+        <a href="مودل.html">محاسب الطعام </a>
+        <a href="1.HTML">وجباتي </a>
+
+
+
+    </div>
+
+    <div class="container">
+        <h2>البحث عن معلومات المنتج الغذائي </h2>
+        <input type="text" id="productName" placeholder="ادخل اسم منتجك ">
+        <button onclick="searchOpenFoodFacts()">بحث</button>
+
+        <hr>
+
+        <h2>مستفسر المنتجاتا الغذائيه</h2>
+        <div id="chatContainer"></div>
+        <input type="text" id="userInput" placeholder="...اكتب رسالتك ">
+        <button onclick="checkCarbohydrates(document.getElementById('userInput').value)">ارسال </button>
+    </div>
+
+    <script>
+        // Function to check the amount of carbohydrates
+        function checkCarbohydrates(input) {
+            if (input.toLowerCase().includes("كاربوهيدرات ") || input.toLowerCase().includes("كارب")) {
+                if (input.match(/\d+/)) {
+                    var carbohydrates = parseFloat(input.match(/\d+/)[0]);
+                    if (!isNaN(carbohydrates)) {
+                        if (carbohydrates > 50) {
+                            addBotMessage("ان كميه الكاربوهيدرات عالي جدا لا تاكله من فضلك وبلغ الطبيب الخاص بك ");
+                        } else if (carbohydrates > 30) {
+                            addBotMessage("عدد الكاربوهيدرات عالي نسبيا انتبه لنفسك ");
+                        } else {
+                            addBotMessage("عدد الكاربوهيدرات مسموح به ");
+                        }
+                    } else {
+                        addBotMessage("Please enter a valid numeric value for carbohydrates.");
+                    }
+                } else {
+                    addBotMessage("ادخل عدد الكاربوهيدرات ");
+                }
+            } else {
+                addBotMessage("انا اسف  لكني لا افهم ذلك ");
+            }
+        }
+
+        // Function to add a message from the user to the chat container
+        function addUserMessage(message) {
+            var chatContainer = document.getElementById("chatContainer");
+            var userMessageElement = document.createElement("div");
+            userMessageElement.classList.add("userMessage");
+            userMessageElement.textContent = message;
+            chatContainer.appendChild(userMessageElement);
+        }
+
+        // Function to add a message from the bot to the chat container
+        function addBotMessage(message) {
+            var chatContainer = document.getElementById("chatContainer");
+            var botMessageElement = document.createElement("div");
+            botMessageElement.classList.add("botMessage");
+            botMessageElement.textContent = message;
+            chatContainer.appendChild(botMessageElement);
+        }
+
+        // Function to search Open Food Facts website
+        function searchOpenFoodFacts() {
+            var productName = document.getElementById("productName").value;
+            var openFoodFactsURL = "https://world.openfoodfacts.org/cgi/search.pl?search_terms=" + encodeURIComponent(productName);
+            window.open(openFoodFactsURL, "_blank");
+        }
+    </script>
+</body>
+</html>

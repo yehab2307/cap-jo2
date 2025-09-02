@@ -1,0 +1,132 @@
+import random
+
+class ChatBot:
+    def __init__(self):
+        self.food_data = {
+            "apple": {"carbohydrates": 25, "calories": 95},
+            "banana": {"carbohydrates": 27, "calories": 105},
+            "orange": {"carbohydrates": 18, "calories": 62},
+            "strawberry": {"carbohydrates": 11, "calories": 56},
+            "watermelon": {"carbohydrates": 11, "calories": 46},
+            "carrot": {"carbohydrates": 12, "calories": 52},
+            "broccoli": {"carbohydrates": 6, "calories": 30},
+            "spinach": {"carbohydrates": 1, "calories": 7},
+            "tomato": {"carbohydrates": 5, "calories": 22},
+            "potato": {"carbohydrates": 37, "calories": 163},
+            "corn": {"carbohydrates": 28, "calories": 154},
+            "pizza": {"carbohydrates": 30, "calories": 285},
+            "burger": {"carbohydrates": 10, "calories": 290},
+            "spaghetti": {"carbohydrates": 43, "calories": 221},
+            "rice": {"carbohydrates": 45, "calories": 216},
+            "mashedPotatoes": {"carbohydrates": 30, "calories": 230},
+            "grilledChicken": {"carbohydrates": 0, "calories": 165},
+            "salmon": {"carbohydrates": 0, "calories": 175},
+            "egg": {"carbohydrates": 1, "calories": 70},
+            "yogurt": {"carbohydrates": 12, "calories": 149},
+            "appleWithPeanutButter": {"carbohydrates": 28, "calories": 230},
+        }
+        self.motivations = [
+            'You are stronger than you think.',
+            'Believe in yourself. You can do it!',
+            'No worries, everything will be ok. Every day is a new beginning.',
+            'You have the power to change your story.'
+        ]
+        self.meals = [
+            'Coconut Flour Chocolate Chip Cookies.',
+            'Dark Chocolate-Covered Strawberries.',
+            'Berries with Whipped Coconut Cream.',
+            'Cinnamon Baked Pears.',
+            'Berry Chia Seed Pudding.',
+            'Berry Sorbe.',
+            'Pumpkin Chia Seed Pudding.',
+            'Chia Seed and Berry Parfait.',
+            'Sugar-Free Jello with Whipped Cream.',
+            'Baked Apple with Cinnamon.',
+            'Sugar-Free Jello with Fruit.',
+            'Dark Chocolate Covered Almonds.',
+            'Avocado Chocolate Mousse.',
+            'Baked Peaches with Cinnamon.',
+            'Apple and Walnut Salad.',
+            'Berries with Whipped Coconut Cream.',
+            'Dark Chocolate-Covered Strawberries.',
+            'Baked Pears with Cinnamon.',
+            'Sugar-Free Jello with Whipped Cream.',
+            'Baked Apple with Cinnamon.',
+            'Berries with Whipped Cream.',
+            'Dark Chocolate and Almonds.',
+            'Baked Apple with Cinnamon.',
+            'Sugar-Free Popsicles.',
+            'Berries with Greek Yogurt.',
+            'Dark Chocolate-Covered Nuts.',
+            'Baked Apple with Cinnamon.',
+            'Chia Seed Pudding with Berries.',
+            'Yogurt Parfait with Nuts and Seeds.',
+            'Almond Flour Blueberry Muffins.',
+            'Sugar-Free Jello with Whipped Cream.',
+            'Baked Cinnamon Apples.',
+            'Chia Seed Parfait.',
+            'Nut Butter and Banana Sandwich.',
+            'Frozen Yogurt Bites.',
+            'Homemade Trail Mix.',
+            'Cottage Cheese with Fresh Fruit.',
+            'Baked Pears with Cinnamon and Walnuts.',
+            'Avocado Chocolate Mousse.'
+        ]
+        self.diabetes_phrases = ["diabetes", "diabetic", "high blood sugar", "insulin resistance"]
+        self.hunger_words = ["hungry", "Hungry", "food", "still hungry", "want more", "extra please", "more", "more please", "extra"]
+
+    def get_carbohydrates(self, food):
+        if food in self.food_data:
+            return str(self.food_data[food]["carbohydrates"])
+        else:
+            return "Sorry, I don't have information about that food."
+
+    def get_calories(self, food):
+        if food in self.food_data:
+            return str(self.food_data[food]["calories"])
+        else:
+            return "Sorry, I don't have information about that food."
+
+    def get_response(self, user_input):
+        user_input = user_input.lower()
+        for food in self.food_data:
+            if food in user_input:
+                if "carb" in user_input:
+                    return self.get_carbohydrates(food) + " grams"
+                elif "calor" in user_input:
+                    return self.get_calories(food) + " calories"
+                else:
+                    return random.choice(self.motivations)
+        if any(phrase in user_input for phrase in self.diabetes_phrases):
+            return """
+            Instructions for diabetics:
+
+            * Monitor your blood sugar levels regularly.
+            * Follow a healthy and balanced diet.
+            * Exercise regularly.
+            * Take your prescribed medications as directed.
+            * Avoid smoking and excessive alcohol consumption.
+            * See your doctor regularly for checkups and to discuss your treatment plan.
+            """
+        if any(word in user_input for word in self.hunger_words):
+            return "Okay, you can take this as a plus: "+self.generateRandomMeals()
+        return "Sorry, I didn't understand that question."
+
+    def generate_random_meal(self):
+        return random.choice(self.meals)
+
+    def start_chat(self):
+        print("Welcome to Food Bot!")
+        print("I can provide information about carbohydrates and calories in food.")
+        print("I can also provide you with some motivation.")
+        while True:
+            user_input = input("You: ").strip()
+            if user_input.lower() == "exit":
+                print("Goodbye!")
+                break
+            response = self.get_response(user_input)
+            print("Food Bot:", response)
+
+if __name__ == "__main__":
+    bot = ChatBot()
+    bot.start_chat()

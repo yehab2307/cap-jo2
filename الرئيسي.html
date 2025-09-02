@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesMain.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px;
+            background-color: #b6deff;
+            color: rgb(0, 0, 0);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+        }
+
+        nav {
+             display: flex;
+             width: 100%; /* تغيير العرض حسب الحاجة */
+             justify-content: flex-end; /* يمكنك تغيير هذا حسب ترتيب العناصر */
+        }
+
+        nav a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            margin-left: 30px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #b6deff;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 80px;
+        }
+
+        .left-panel {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .right-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .image-cube {
+            width: 100px;
+            height: 100px;
+            background-color: #fcb9b9;
+            margin: 10px;
+        }
+
+        footer {
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+            background-color: #b6deff;
+            color: rgb(0, 0, 0);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            box-shadow: 0px -2px 4px rgba(57, 126, 0, 0.1);
+        }
+
+        .contact-us input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #f551df;
+            margin-right: 10px;
+        }
+
+        .copyright {
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 10px;
+    color: black; /* تغيير لون النص إلى الأسود */
+}
+
+
+        .action-buttons {
+            margin-top: 10px;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+            color: rgb(255, 254, 254);
+            background-color: #f551df;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-buttons a:hover {
+            background-color: #fc9bef;
+        }
+    </style>
+    <title>مستقل مرضي السكري</title>
+</head>
+<body>
+    <header>
+        <div class="logo" style="text-align: center;">
+            <img src="logo.png" alt="شعار The Future of Diabetes">
+          </div>
+          <nav>
+            <a href="signup.html">إنشاء حساب</a>
+            <a href="login.html">تسجيل الدخول</a>
+            <a href="signup.html"> </a>
+
+        </nav>
+    </header>
+
+    <main>
+        <div class="left-panel">
+            <h4 style="color: rgb(11, 203, 236);">The Future of Diabetes</h4>
+            <p>Welcome to the Future of Diabetes!</p>
+        </div>
+       
+        </div>
+        <div class="action-buttons">
+            <a href="تسجيل.html">تسجيل دخول </a>
+            <a href="انشاء.html">انشاء حساب</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="contact-us">
+            <label>:تواصل معنا </label>
+            <input type="text" placeholder="اكتب رسذالتك">
+        </div>
+        <div class="copyright">Copyright © 2024 The Future of Diabetes</div>
+    </footer>
+
+    <script src="scriptsMain.js"></script>
+</body>
+</html>

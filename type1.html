@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes-Friendly Meal Recommender</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1;
+            color: #333;
+        }
+        .navbar {
+            background-color: #b6deff;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar a {
+            display: inline-block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #ffc0cb;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        .navbar img {
+            height: 70px;
+            vertical-align: middle;
+        }
+        .container {
+            margin-top: 60px;
+            text-align: center;
+            padding: 20px;
+            background-color: #ffe4e1;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        input, select {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #b7a2ee;
+            border-radius: 5px;
+            background-color: #fffafa;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        input:hover, select:hover {
+            transform: scale(1.05);
+            font-size: 16px;
+        }
+        #generateButton {
+            padding: 10px 20px;
+            background-color: #fa7bef;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        #generateButton:hover {
+            background-color: #f76ee4;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        #mealOutput {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #b6deff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(-100%); /* Start off-screen to the left */
+            transition: opacity 1s, transform 1s;
+        }
+        #mealOutput.show {
+            opacity: 1;
+            transform: translateX(0); /* Move to center */
+        }
+        #mealOutput.old {
+            transform: translateX(-100%); /* Move old meal to the right */
+        }
+        #mealOutput img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="logo.png" alt="Logo">
+        <a href="recipes.html">Recipes</a>
+        <a href="exercises.html">Exercises</a>
+        <a href="products.html">Products</a>
+        <a href="https://chatgpt.com/g/g-TLQZRPNDG-insu-bot">Chat Bot</a>
+        <a href="http://127.0.0.1:5000/food">Food Calculator</a>
+        <a href="type1.html">My Meal</a>
+        <a href="http://127.0.0.1:5000/">my measure</a>
+
+    </div>
+
+    <div class="container">
+        <h1>Diabetes-Friendly Meal Recommender</h1>
+
+        <label for="ageInput">Enter Age:</label>
+        <input type="number" id="ageInput" min="1" max="100" value="20">
+        <br><br>
+
+        <label for="mealType">Choose Meal Type:</label>
+        <select id="mealType">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+        </select>
+        <br><br>
+
+        <div id="mealOutput"></div>
+        <button id="generateButton">Generate Next Meal</button>
+    </div>
+
+    <script>
+        let mealIndex = 0; // This will keep track of the current meal index
+
+        function generateMeal() {
+            const ageInput = parseInt(document.getElementById("ageInput").value);
+            const mealType = document.getElementById("mealType").value;
+
+            let meals;
+            if (ageInput >= 20) {
+                meals = {
+                    breakfast: [
+                        { name: "Vegetable Omelette", description: "A healthy breakfast!", protein: "2 eggs", carbs: "Whole wheat toast", veggies: "Spinach, tomatoes", image: "أومليت خضار.jpeg" },
+                        { name: "Oatmeal with Fruits", description: "Healthy and nutritious!", protein: "Almonds", carbs: "Oats", veggies: "Blueberries, banana", image: "دقيق الشوفان مع الفواكه الطازجة والمكسرات.jpeg" },
+                        { name: "Greek Yogurt with Fruits", description: "High in protein and healthy fats.", protein: "Greek yogurt", carbs: "Honey", veggies: "Strawberries, blueberries", image: "زبادي يوناني بالفواكه.jpeg" },
+                        { name: "Scrambled Eggs with Vegetables", description: "High in protein and veggies.", protein: "Eggs", carbs: "Whole wheat toast", veggies: "Mushrooms, spinach", image: "بيض مخفوق مع الخضار.jpeg" },
+                        { name: "Whole Wheat Bread with Avocado", description: "Rich in healthy fats.", protein: "Avocado", carbs: "Whole wheat bread", veggies: "Lettuce, tomatoes", image: "خبز القمح الكامل مع الأفوكادو.jpeg" },
+                    ],
+                    lunch: [
+                        { name: "Grilled Chicken Salad", description: "Nutritious and filling.", protein: "Chicken breast", carbs: "Mixed greens, quinoa", veggies: "Tomatoes, cucumber", image: "سلطة الدجاج المشوي.jpeg" },
+                        { name: "Grilled Chicken with Vegetables", description: "Healthy grilled chicken.", protein: "Chicken breast", carbs: "Brown rice", veggies: "Broccoli, carrots", image: "دجاج مشوي مع الخضار.jpeg" },
+                        { name: "Grilled Fish Salad", description: "High in Omega-3.", protein: "Salmon", carbs: "Mixed greens", veggies: "Spinach, kale", image: "سمك مشوي مع سلطة الفواكه والخضار.jpeg" },
+                        { name: "Stuffed Bell Peppers", description: "Hearty meal with rice and chicken.", protein: "Ground chicken", carbs: "Brown rice", veggies: "Bell peppers, zucchini", image: "فلفل محشي.jpeg" },
+                    ],
+                    dinner: [
+                        { name: "Grilled Salmon with Vegetables", description: "High in protein and omega-3.", protein: "Salmon", carbs: "Sweet potatoes", veggies: "Spinach, kale", image: "سمك السلمون المشوي مع الخضار.jpeg" },
+                        { name: "Vegetable Stir-Fry with Tofu", description: "Light and healthy dinner.", protein: "Tofu", carbs: "Rice noodles", veggies: "Broccoli, bell peppers", image: "خضار محمر مع التوفو.jpeg" },
+                        { name: "Vegetarian Soup", description: "Comforting and nutritious.", protein: "Lentils", carbs: "Carrots, potatoes", veggies: "Spinach, tomatoes", image: "حساء نباتي.jpeg" },
+                        { name: "Chicken and Vegetable Stir Fry", description: "Healthy and quick dinner.", protein: "Chicken breast", carbs: "Brown rice", veggies: "Bell peppers, broccoli", image: "دجاج وخضار محمر.jpeg" },
+                    ],
+                };
+            } else {
+                meals = {}; // If age is not >= 20, no meals available
+            }
+
+            // Get the next meal
+            const selectedMeal = meals[mealType][mealIndex];
+            mealIndex = (mealIndex + 1) % meals[mealType].length; // Move to the next meal, loop back after the last one
+
+            // Hide the current meal with animation
+            const mealOutput = document.getElementById("mealOutput");
+            mealOutput.classList.add("old");
+
+            setTimeout(() => {
+                mealOutput.innerHTML = `  
+                    <h2 class="meal-title">${selectedMeal.name}</h2>
+                    <p class="meal-description">${selectedMeal.description}</p>
+                    <p class="meal-ingredient">Protein: ${selectedMeal.protein}</p>
+                    <p class="meal-ingredient">Carbs: ${selectedMeal.carbs}</p>
+                    <p class="meal-ingredient">Veggies: ${selectedMeal.veggies}</p>
+                    <img src="${selectedMeal.image}" alt="${selectedMeal.name}" class="meal-image">
+                `;
+                mealOutput.classList.remove("old");
+                mealOutput.classList.add("show");
+            }, 500); // Delay for animation
+        }
+
+        document.getElementById("generateButton").addEventListener("click", generateMeal);
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffe4e1; /* Light pastel background color */
+            color: #333;
+        }
+        .navbar {
+            background-color: #b6deff; /* Pastel color */
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 10px 0;
+            text-align: center; /* Center the content */
+        }
+        .navbar a {
+            display: inline-block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: transform 0.3s, font-size 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #ffc0cb; /* Slightly darker pastel for hover effect */
+            transform: scale(1.1);
+            font-size: 18px; /* Slightly larger font size on hover */
+        }
+        .navbar img {
+            height: 70px;
+            vertical-align: middle;
+        }
+        .container {
+            margin-top: 60px; /* Space for the navbar */
+            text-align: center;
+            padding: 20px;
+            background-color: #ffe4e1; /* Ensure the container matches the body */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+        .card img {
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card .info {
+            padding: 20px;
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1rem;
+            color: #666;
+            text-align: left; /* Left align text for better readability */
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .modal-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .modal-content iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+        .close:hover {
+            color: #ff0000; /* Red color on hover */
+        }
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="index">
+    <div class="navbar">
+        <img src="logo.png" alt="Logo">
+        <a href="recipes.html">Recipes</a>
+        <a href="exercises.html">Exercises</a>
+        <a href="products.html">Products</a>
+        <a href="https://chatgpt.com/g/g-TLQZRPNDG-insu-bot">Chat Bot</a>
+        <a href="http://127.0.0.1:5000/food">Food Calculator</a>
+        <a href="type1.html">My Meal</a>
+        <a href="http://127.0.0.1:5000/">my measure</a>
+
+    </div>
+
+    <div class="container">
+        <!-- Squats -->
+        <div class="card" onclick="openModal('Squats', 'https://www.youtube.com/embed/your-video-id')">
+            <img src="Squats.jpeg" alt="Squats">
+            <div class="info">
+                <h2>Squats</h2>
+                <p>Stand with your feet shoulder-width apart or wider, and keep your hands by your sides. Slowly bend your knees as if you're sitting back into a chair. Make sure your back stays straight and your knees are over your ankles, then return to the starting position.</p>
+            </div>
+        </div>
+
+        <!-- Push-ups -->
+        <div class="card" onclick="openModal('Push-ups', 'https://www.youtube.com/embed/your-video-id')">
+            <img src="Push-ups.jpeg" alt="Push-ups">
+            <div class="info">
+                <h2>Push-ups</h2>
+                <p>Start in a plank position with your hands on the floor, relying on the strength of your arms and shoulders. Bend your arms and lower yourself down until you're almost touching the ground, then push your body back up.</p>
+            </div>
+        </div>
+
+        <!-- Jumping Jacks -->
+        <div class="card" onclick="openModal('Jumping Jacks', 'https://www.youtube.com/embed/your-video-id')">
+            <img src="Jumping-Jacks.jpeg" alt="Jumping Jacks">
+            <div class="info">
+                <h2>Jumping Jacks</h2>
+                <p>Begin with your feet together and your arms at your sides. Jump quickly while opening your legs wide and raising your arms above your head. Jump again to return to the starting position.</p>
+            </div>
+        </div>
+
+        <!-- Knee Push-up -->
+        <div class="card" onclick="openModal('Knee Push-up', 'https://www.youtube.com/embed/your-video-id')">
+            <img src="knee-push-up.jpg" alt="Knee Push-up">
+            <div class="info">
+                <h2>Knee Push-up</h2>
+                <p>Doing exercise with Knee Push Up in 2 steps. Cartoon for workout diagram in exercise posture for flat abs.</p>
+            </div>
+        </div>
+
+        <!-- Chair Push-up -->
+        <div class="card" onclick="openModal('Chair Push-up', 'https://www.youtube.com/embed/your-video-id')">
+            <img src="chair-push-up.jpg" alt="Chair Push-up">
+            <div class="info">
+                <h2>Chair Push-up</h2>
+                <p>Doing exercise with Knee Push Up in 2 steps. Cartoon for workout diagram in exercise posture for flat abs.</p>
+            </div>
+        </div>
+
+        <!-- Burpee Exercise -->
+        <div class="card" onclick="openModal('Burpee Exercise', 'https://www.youtube.com/embed/your-video-id')">
+            <img src="Burpee-Exercise.jpg" alt="Burpee Exercise">
+            <div class="info">
+                <h2>Burpee Exercise</h2>
+                <p>Doing Burpee Home Workout Exercise. Colorful Concept of Black Female Working at Home on Her Body a Young Woman in Sportswear Top, Sneakers, Leggings Doing Burpees with Push-Ups.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <iframe id="modalVideo" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Function to open modal
+        function openModal(title, videoUrl) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalVideo').src = videoUrl;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+            document.getElementById('modalVideo').src = ""; // Stop the video when modal is closed
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
